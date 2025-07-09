@@ -1,37 +1,19 @@
-# Package Sync Demo
+# Closure Template Compiler Wrapper
 
-This Maven project demonstrates the conventional package‑to‑directory mapping in Java.
+[![Build Status](https://github.com/tntim96/closure-template-compiler-wrapper/workflows/Java-CI/badge.svg)](https://github.com/tntim96/closure-template-compiler-wrapper/actions?query=workflow%3A%22Java-CI%22)
 
-## Build
+This `SoyParseInfoGeneratorRunner` uses reflection to call `SoyParseInfoGenerator` to skip the `System.exit` call.
 
-```bash
-mvn package
-```
+In Java 17 it was possible to override the security manage to ignore the system exit call, but in Java 21 this is no longer possible.
 
-## Run
+All command line options are passed to the `SoyParseInfoGenerator` class.
 
-You can run the compiled class directly:
+References:
+* https://github.com/google/closure-templates/blob/master/java/src/com/google/template/soy/SoyParseInfoGenerator.java
+* https://github.com/google/closure-templates/blob/master/documentation/codelabs/helloworlds/helloworld_java.md#using-soyparseinfogenerator
 
-```bash
-mvn exec:java
-```
+### Update POM version
+`mvn versions:set -DnewVersion=2.0.20`
 
-Or, after packaging:
-
-```bash
-java -cp target/package-sync-demo-1.0-SNAPSHOT.jar com.google.template.soy.App
-```
-
-## Directory Structure
-
-```
-package-sync-demo/
-├── pom.xml
-└── src
-    └── main
-        └── java
-            └── com
-                └── example
-                    └── app
-                        └── App.java
-```
+### Release
+`mvn -DperformRelease=true clean deploy`
