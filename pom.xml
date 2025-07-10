@@ -3,10 +3,41 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.tntim96</groupId>
+    <groupId>com.github.tntim96.soy</groupId>
     <artifactId>closure-template-compiler-wrapper</artifactId>
-    <version>2017-08-08-01-SNAPSHOT</version>
+    <version>2017-08-08-01</version>
     <packaging>jar</packaging>
+    <url>https://github.com/tntim96/closure-template-compiler-wrapper</url>
+
+    <name>closure-template-compiler-wrapper</name>
+    <description>Invokes SoyParseInfoGenerator without ever calling System.exit</description>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/tntim96/closure-template-compiler-wrapper/</url>
+        <connection>scm:git:git://github.com/tntim96/closure-template-compiler-wrapper.git</connection>
+    </scm>
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/tntim96/closure-template-compiler-wrapper/issues</url>
+    </issueManagement>
+    <developers>
+        <developer>
+            <id>tntim96</id>
+            <name>Tim</name>
+            <email>tntim96@gmail.com</email>
+            <roles>
+                <role>project-lead</role>
+            </roles>
+            <timezone>+10</timezone>
+        </developer>
+    </developers>
 
     <properties>
         <!-- Set the Java version for compilation -->
@@ -41,22 +72,57 @@
 
     <build>
         <plugins>
-            <!-- Compiler plugin: compiles Java source to target/classes -->
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.8.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
-            </plugin>
-
-            <!-- exec:java plugin so you can run `mvn exec:java` -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <mainClass>com.google.template.soy.App</mainClass>
-                </configuration>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.11.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.2.8</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
