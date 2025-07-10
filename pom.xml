@@ -3,10 +3,31 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.tntim96</groupId>
+    <groupId>com.github.tntim96.soy</groupId>
     <artifactId>closure-template-compiler-wrapper</artifactId>
     <version>2017-08-08-01-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <url>https://github.com/tntim96/closure-template-compiler-wrapper</url>
+
+    <scm>
+        <url>https://github.com/tntim96/closure-template-compiler-wrapper/</url>
+        <connection>scm:git:git://github.com/tntim96/closure-template-compiler-wrapper.git</connection>
+    </scm>
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/tntim96/closure-template-compiler-wrapper/issues</url>
+    </issueManagement>
+    <developers>
+        <developer>
+            <id>tntim96</id>
+            <name>Tim</name>
+            <email>tntim96@gmail.com</email>
+            <roles>
+                <role>project-lead</role>
+            </roles>
+            <timezone>+10</timezone>
+        </developer>
+    </developers>
 
     <properties>
         <!-- Set the Java version for compilation -->
@@ -41,20 +62,13 @@
 
     <build>
         <plugins>
-            <!-- Compiler plugin: compiles Java source to target/classes -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
-            </plugin>
-
-            <!-- exec:java plugin so you can run `mvn exec:java` -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.1.1</version>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.8.0</version>
+                <extensions>true</extensions>
                 <configuration>
-                    <mainClass>com.google.template.soy.App</mainClass>
+                    <publishingServerId>central</publishingServerId>
                 </configuration>
             </plugin>
         </plugins>
