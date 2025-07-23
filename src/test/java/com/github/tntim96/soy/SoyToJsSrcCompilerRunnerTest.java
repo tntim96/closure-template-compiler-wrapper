@@ -1,18 +1,17 @@
 package com.github.tntim96.soy;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
 
-public class SoyParseInfoGeneratorRunnerTest {
+public class SoyToJsSrcCompilerRunnerTest {
 
   @Test
   public void shouldNotExitJvm() {
     try {
-      SoyParseInfoGeneratorRunner.main(new String[]{});
+      SoyToJsSrcCompilerRunner.main(new String[]{});
       fail("Expected an exception to be thrown, but none was thrown.");
     } catch (Exception e) {
       System.out.println("e = " + e);
