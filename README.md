@@ -11,6 +11,7 @@ All command line options are passed to the `SoyParseInfoGenerator` or `SoyToJsSr
 
 References:
 * https://github.com/google/closure-templates/blob/master/java/src/com/google/template/soy/SoyParseInfoGenerator.java
+* https://github.com/google/closure-templates/blob/master/java/src/com/google/template/soy/SoyToJsSrcCompiler.java
 * https://github.com/google/closure-templates/blob/master/documentation/codelabs/helloworlds/helloworld_java.md#using-soyparseinfogenerator
 
 ### Update POM version
